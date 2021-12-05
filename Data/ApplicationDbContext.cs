@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Leave_Management.Models;
 
 namespace Leave_Management.Data
 {
@@ -17,6 +18,7 @@ namespace Leave_Management.Data
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<LeaveHistory> LeaveHistories { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
+        public DbSet<Leave_Management.Models.LeaveTypeVM> DetailsLeaveTypeVM { get; set; }
 
     }
 }
