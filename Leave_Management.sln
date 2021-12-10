@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leave_Management", "Leave_Management.csproj", "{E98E73D2-3A91-492F-91FB-A3B4E88973CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leave_Management", "Leave_Management.csproj", "{E98E73D2-3A91-492F-91FB-A3B4E88973CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
