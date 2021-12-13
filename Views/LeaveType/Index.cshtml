@@ -17,6 +17,9 @@ Create New</a>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.DefaultDays)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
             <th>Action</th>
@@ -27,6 +30,9 @@ Create New</a>
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.DefaultDays)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateCreated)
