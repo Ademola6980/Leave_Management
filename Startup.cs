@@ -36,7 +36,7 @@ namespace Leave_Management
                     Configuration.GetConnectionString("DefaultConnection")));
             // Added Repository and Contract to the startup services.
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
-            services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
             // Added Mapper to the startup services.
             services.AddAutoMapper(typeof(Maps));

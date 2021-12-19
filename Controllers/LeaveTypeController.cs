@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Leave_Management.Controllers
 {
@@ -24,21 +25,22 @@ namespace Leave_Management.Controllers
             _mapper = mapper;
         }
         // GET: LeaveTypeController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var leaveType = _repo.FindAll().ToList();
-            var model = _mapper.Map<List<LeaveType>, List<LeaveTypeVM>>(leaveType);
+            var leaveType = await _repo.FindAll();
+            var model = _mapper.Map<List<LeaveType>, List<LeaveTypeVM>>(leaveType.ToList());
             return View(model);
         }
 
         // GET: LeaveTypeController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            if (!_repo.isExists(id))
+             var isExists = await _repo.isExists(id);
+            if (!isExists)
             {
                 return NotFound();
             }
-            var leavetype= _repo.FindById(id);
+            var leavetype= await _repo.FindById(id);
             var model =_mapper.Map<LeaveTypeVM>(leavetype);
             return View(model);
         }
@@ -52,7 +54,7 @@ namespace Leave_Management.Controllers
         // POST: LeaveTypeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(LeaveTypeVM model)
+        public async Task<ActionResult> Create(LeaveTypeVM model)
         {
              if(!ModelState.IsValid)
             {
@@ -63,7 +65,7 @@ namespace Leave_Management.Controllers
             {
                 var leaveType = _mapper.Map<LeaveType>(model);
                 leaveType.DateCreated = DateTime.Now;
-                var isSucess=_repo.Create(leaveType);
+                var isSucess = await _repo.Create(leaveType);
                 if(!isSucess)
                 {
                     ModelState.AddModelError("", "Something went wrong!!");
@@ -79,13 +81,14 @@ namespace Leave_Management.Controllers
         }
 
         // GET: LeaveTypeController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            if(!_repo.isExists(id))
+        public async Task<ActionResult> Edit(int id)
+        {    
+            var isExists = await _repo.isExists(id);
+            if (!isExists)
             {
                 return NotFound();
             }
-            var leavetype=_repo.FindById(id);
+            var leavetype= await _repo.FindById(id);
             var model = _mapper.Map<LeaveTypeVM>(leavetype);
             return View(model);
         }
@@ -93,7 +96,7 @@ namespace Leave_Management.Controllers
         // POST: LeaveTypeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(LeaveTypeVM model)
+        public async Task<ActionResult> Edit(LeaveTypeVM model)
         {
             if (!ModelState.IsValid)
             {
@@ -104,7 +107,7 @@ namespace Leave_Management.Controllers
             try
             {
                 var leaveType = _mapper.Map<LeaveType>(model);
-                var isSucess = _repo.Update(leaveType);
+                var isSucess =await _repo.Update(leaveType);
                 if (!isSucess)
                 {
                     ModelState.AddModelError("", "Something went wrong!!");
@@ -120,14 +123,14 @@ namespace Leave_Management.Controllers
         }
 
         // GET: LeaveTypeController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var leaveType = _repo.FindById(id);
+            var leaveType = await _repo.FindById(id);
             if (leaveType == null)
             {
                 return NotFound(ModelState);
             }
-            var isSucess = _repo.Delete(leaveType);
+            var isSucess =await _repo.Delete(leaveType);
             if (!isSucess)
             {
 
